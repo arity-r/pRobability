@@ -24,8 +24,5 @@ for (i in 1:n) {
 }
 
 par(mfrow=c(2, 1)) # 2 figures arranged in 2 rows and 2 columns
-cat(length(x))
-cat(length(y1))
-cat(length(y2))
 plot(x, y1, main='The proportion of heads minus 1 / 2', type='l')
 plot(x, y2, main='The number of heads minus half the number of tosses', type='l')
