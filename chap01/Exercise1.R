@@ -8,7 +8,7 @@
 
 n = 4000 # number of coin tossing
 count_head = 0 # this counts the number of head
-x = c(1:(n/100))
+tosses = c(1:(n/100))
 y1 = rep(0, n/100) # the proportion of heads minus 1 / 2
 y2 = rep(0, n/100) # the number of heads minus half the number of tosses
 for (i in 1:n) {
@@ -24,5 +24,5 @@ for (i in 1:n) {
 }
 
 par(mfrow=c(2, 1)) # 2 figures arranged in 2 rows and 2 columns
-plot(x, y1, main='The proportion of heads minus 1 / 2', type='l')
-plot(x, y2, main='The number of heads minus half the number of tosses', type='l')
+plot(tosses, y1, main='The proportion of heads minus 1 / 2', type='l')
+plot(tosses, y2, main='The number of heads minus half the number of tosses', type='l')

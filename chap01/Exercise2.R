@@ -7,9 +7,9 @@
 #' About how large must n be so that approximately 95 out of 100
 #' times the proportion of heads is between .4 and .6?
 
-N = 100      # maximum number of n
+N = 100       # maximum number of n
 x = c(1:N)    # data for x axis
-y = rep(0, N) # data for the proportion of heads is between .4 and .6
+y = rep(0, N) # proportion of heads is between .4 and .6
 for (n in 1:N) {
   count_p = 0
   for (i in 1:100) { # run 100 experiments
@@ -31,4 +31,4 @@ for (n in 1:N) {
   
 }
 
-plot(x, y, main='The number of experiments', type='l')
+plot(x, y, type='l')

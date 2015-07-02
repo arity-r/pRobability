@@ -9,7 +9,7 @@ n = 1000 # the number of bets
 bet_num = c(1:n)
 winnings = rep(0, n+1) # the amount of total winnings
 winnings[1] = 0
-for (i in 2:n+1) { # 
+for (i in 2:n+1) {
   if (runif(1) < 1.0 / 36) {
     winnings[i] = winnings[i-1] + 35 # win this game
   } else {

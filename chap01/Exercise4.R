@@ -13,7 +13,8 @@ for (i in 1:n) {
   is_serve_me = TRUE
   while (score_me < 21 && score_oppornent < 21) {
     
-    # if I serve, win with probability 0.6 and oppornent serve, win with probability of 0.5
+    # if I serve, win with probability 0.6 and
+    # oppornent serve, win with probability of 0.5
     if (is_serve_me && runif(1) < 0.6 || !is_serve_me && runif(1) < 0.5) {
       score_me = score_me + 1
       is_serve_me = TRUE
@@ -22,10 +23,13 @@ for (i in 1:n) {
       is_serve_me = FALSE
     }
     
+  }
+  
   if (score_me > score_oppornent) {
     win_count = win_count + 1
   }
   
 }
 
-cat(win_count / n)
+cat('win probability: ', win_count / n)
+

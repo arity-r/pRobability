@@ -15,4 +15,8 @@ for (i in 1:n) {
   }
 }
 
-cat(win)
+if (win) {
+  cat('Win')
+} else {
+  cat('Lose')
+}
