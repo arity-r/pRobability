@@ -29,4 +29,4 @@ for (i in 1:n) {
   
 }
 
-plot(x, y)
+plot(x, y, type='l')
