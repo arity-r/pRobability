@@ -1,7 +1,8 @@
 
 #' Example 2.3 BuffonsNeedle
 #' This program will estimate the area of the
-#' region E under the curve y=x^2 in the unit square
+#' region E under the curve d=1/2*sin(theta) in the
+#' theta:[0, pi/2], d:[0, 1/2]
 
 n = 10000 # the number of experiments
 cross_num = 0 # the number of needles crossing a line
@@ -11,8 +12,8 @@ xdata = rep(0, n) # x value of points
 ydata = rep(0, n) # y value of points
 for (i in 1:n) {
   # plot a point on unit square at random
-  t = runif(1) * 0.5 * pi
   d = runif(1) * 0.5
+  t = runif(1) * 0.5 * pi
   if (d / sin(t) < 1 / 2) {
     cross_num = cross_num + 1
   }
@@ -32,7 +33,8 @@ plot(theta, d, type='l', xlim=c(0, pi/2), ylim=c(0, 1/2))
 polygon(pt, pd, col='skyblue')
 points(theta_data, ddata, cex=.01)
 
-plot(1, type='n', xlab='', ylab='', axes=F, xlim=c(0, 10), ylim=c(0, 5))
+plot(1, type='n', xlab='', ylab='', main='Needles', axes=F,
+     xlim=c(0, 10), ylim=c(0, 5))
 for (i in 0:5) {
   abline(h=i, v=-1)
 }
@@ -47,4 +49,4 @@ for (i in seq(1, n, 100)) {
         col='skyblue')
 }
 
-cat('Estimate of area is ', cross_num / n)
+cat('Estimate of area is ', cross_num / n * (pi / 4))
