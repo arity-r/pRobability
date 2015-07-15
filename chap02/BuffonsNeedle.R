@@ -31,10 +31,10 @@ pd = c(rep(0, length(theta)), rev(d))
 par(mfrow=c(1, 2))
 plot(theta, d, type='l', xlim=c(0, pi/2), ylim=c(0, 1/2))
 polygon(pt, pd, col='skyblue')
-points(theta_data, ddata, cex=.01)
+points(theta_data[seq(1, n, 10)], ddata[seq(1, n, 10)], cex=.01)
 
 plot(1, type='n', xlab='', ylab='', main='Needles', axes=F,
-     xlim=c(0, 10), ylim=c(0, 5))
+     xlim=c(0, 10), ylim=c(0, 5), asp=1)
 for (i in 0:5) {
   abline(h=i, v=-1)
 }
@@ -46,7 +46,7 @@ for (i in seq(1, n, 100)) {
   d = ddata[i]
   lines(c(x - 0.5*cos(t), x + 0.5*cos(t)),
         c(y + d - 0.5*sin(t), y + d + 0.5*sin(t)),
-        col='skyblue')
+        col='skyblue', asp=1)
 }
 
 cat('Estimate of area is ', cross_num / n * (pi / 4))
