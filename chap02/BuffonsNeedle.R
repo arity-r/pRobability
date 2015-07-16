@@ -5,40 +5,33 @@
 #' theta:[0, pi/2], d:[0, 1/2]
 
 n = 10000 # the number of experiments
-cross_num = 0 # the number of needles crossing a line
-theta_data = rep(0, n) # angle of needles
-ddata = rep(0, n) # the distance from the center of needle to the nearest lines
-xdata = rep(0, n) # x value of points
-ydata = rep(0, n) # y value of points
-for (i in 1:n) {
-  # plot a point on unit square at random
-  d = runif(1) * 0.5
-  t = runif(1) * 0.5 * pi
-  if (d / sin(t) < 1 / 2) {
-    cross_num = cross_num + 1
-  }
-  theta_data[i] = t
-  ddata[i] = d
-  xdata[i] = runif(1) * 10
-  ydata[i] = runif(1) * 5
-}
+theta_data = runif(n) * pi / 2 # angle of needles
+ddata = runif(n) / 2 # the distance from the center of needle to the nearest lines
+xdata = runif(n) * 10 # x value of points (for drawing needle)
+ydata = runif(n) * 5 # y value of points (for ddrawing needle)
+# the number of needles crossing a line
+cross_num = length(ddata[ddata / sin(theta_data) < 1 / 2])
 
+par(mfrow=c(1, 2))
+
+# drawing region
 theta = seq(0, pi / 2, 0.001)
 d = 0.5 * sin(theta)
 pt = c(theta, rev(theta))
 pd = c(rep(0, length(theta)), rev(d))
 
-par(mfrow=c(1, 2))
 plot(theta, d, type='l', xlim=c(0, pi/2), ylim=c(0, 1/2))
 polygon(pt, pd, col='skyblue')
 points(theta_data[seq(1, n, 10)], ddata[seq(1, n, 10)], cex=.01)
 
+# drawing lattice
 plot(1, type='n', xlab='', ylab='', main='Needles', axes=F,
      xlim=c(0, 10), ylim=c(0, 5), asp=1)
 for (i in 0:5) {
-  abline(h=i, v=-1)
+  abline(h=i)
 }
 
+# drawing needles
 for (i in seq(1, n, 100)) {
   x = xdata[i]
   y = ydata[i]
@@ -50,3 +43,4 @@ for (i in seq(1, n, 100)) {
 }
 
 cat('Estimate of area is ', cross_num / n * (pi / 4))
+cat('Estimate of pi is ', 2 / (cross_num / n))

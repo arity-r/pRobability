@@ -15,5 +15,3 @@
 * Exercise7.R
 * Exercise8.R
 * Exercise9.R
-* Exercise10.R
-* Exercise11.R

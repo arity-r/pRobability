@@ -83,7 +83,3 @@ for (i in seq(1, n, 100)) {
 barplot(res1/n, ylim=c(0, 1), main=n)
 barplot(res2/n, ylim=c(0, 1), main=n)
 barplot(res3/n, ylim=c(0, 1), main=n)
-
-cat('1st method: ', res1/n)
-cat('2nd method: ', res2/n)
-cat('3rd method: ', res3/n)

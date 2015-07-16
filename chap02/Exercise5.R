@@ -4,16 +4,10 @@
 #' under the graph of y=1/(x+1) in the unit square
 
 n = 10000 # the number of experiments
-inside_num = 0 # the number of points under the curve y=x^2
 xdata = runif(n) # x value of point
 ydata = runif(n) # y value of point
-for (i in 1:n) {
-  x = xdata[i]
-  y = ydata[i]
-  if (y < 1/(x+1)) {
-    inside_num = inside_num + 1
-  }
-}
+# the number of points under the curve y=1/(x+1)
+inside_num = length(xdata[ydata < 1 / (xdata + 1)])
 
 x = seq(0, 1, 0.001)
 y = 1 / (x + 1)

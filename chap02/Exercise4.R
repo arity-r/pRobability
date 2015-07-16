@@ -5,16 +5,10 @@
 #' unit square by choosing 10000 points at random.
 
 n = 10000 # the number of experiments
-inside_num = 0 # the number of points under the curve y=x^2
 xdata = runif(n) # x value of point
 ydata = runif(n) # y value of point
-for (i in 1:n) {
-  x = xdata[i]
-  y = ydata[i]
-  if (y < sin(pi * x)) {
-    inside_num = inside_num + 1
-  }
-}
+# the number of points under the curve y=sin(pi*x)
+inside_num = length(xdata[ydata < sin(pi * xdata)])
 
 x = seq(0, 1, 0.001)
 y = sin(pi * x)
