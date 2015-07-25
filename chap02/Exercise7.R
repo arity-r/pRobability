@@ -13,9 +13,9 @@ N = c(100, 1000, 10000)
 est_pi = rep(0, length(N))
 for (i in 1:length(N)) {
   n = N[i]
-  theta_data = runif(n) * pi / 2 # angle of needles
-  d1data = runif(n) / 2 # the distance from the needle to horizontal lines
-  d2data = runif(n) / 2 # the distance from the needle to vertical lines
+  theta_data = runif(n, min=0, max=pi/2) # angle of needles
+  d1data = runif(n, min=0, max=0.5) # the distance from the needle to horizontal lines
+  d2data = runif(n, min=0, max=0.5) # the distance from the needle to vertical lines
   cross_num = length(ddata[d1data < L/2*sin(theta_data) |
                              d2data < L/2*cos(theta_data)])
   est_pi[i] = (4*L - L^2) / (cross_num / n)

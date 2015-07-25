@@ -18,8 +18,8 @@ func <- function(x) {
 # simulation part
 n = 10000 # the number of trial
 bins = 24 # the number of bins
-data = (-30) * log(runif(n)) # sum of two random numbers
-data = data[data < xlim[2]]
+data = (-30) * log(runif(n)) # (-1/30)log(rnd)
+data = data[data < xlim[2]] # only use data in range [0, 120]
 histinfo = hist(data, breaks=seq(xlim[1], xlim[2], l=bins+1))
 
 # function part

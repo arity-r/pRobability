@@ -8,7 +8,7 @@
 n = 1000
 r = runif(n)
 props = c(1/3, 1/4, 1/5, 1/6, 1/20)
-nums = rep(0, 5)
+nums = numeric(0)
 accumlate = 0
 for (i in 1:5) {
   nums[i] = length(r[r >= accumlate & r < accumlate + props[i]])

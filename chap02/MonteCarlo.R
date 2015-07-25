@@ -10,7 +10,7 @@ ydata = runif(n) # y value of point
 inside_num = length(xdata[ydata < xdata * xdata])
 
 # draw y = x^2
-x = seq(0, 2, 0.001)
+x = seq(0, 1, 0.001)
 y = x ^ 2
 px = c(x, rev(x))
 py = c(rep(0, length(x)), rev(y))
@@ -18,7 +18,7 @@ py = c(rep(0, length(x)), rev(y))
 plot(c(), c(), main='y = x^2',
      axes=F, xlab='', ylab='', xlim=c(0,1), ylim=c(0,1), asp=1)
 # drawing region
-polygon(px[px<1&py<1], py[px<1&py<1], col='skyblue')
+polygon(px, py, col='skyblue')
 # drawing square
 lines(c(0, 1, 1, 0, 0), c(0, 0, 1, 1, 0))
 # plotting points

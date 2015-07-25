@@ -13,7 +13,7 @@ N = c(100, 1000, 10000)
 est_pi = rep(0, length(N))
 for (i in 1:length(N)) {
   n = N[i]
-  theta_data = runif(n) * pi / 2 # angle of needles
+  theta_data = runif(n, min=0, max=pi/2) # angle of needles
   cross_num = L*sin(theta_data) + L*cos(theta_data)
   est_pi[i] = (4*L) / (mean(cross_num))
 }

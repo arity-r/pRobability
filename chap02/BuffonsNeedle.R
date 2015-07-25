@@ -6,9 +6,9 @@
 
 n = 10000 # the number of experiments
 theta_data = runif(n) * pi / 2 # angle of needles
-ddata = runif(n) / 2 # the distance from the center of needle to the nearest lines
-xdata = runif(n) * 10 # x value of points (for drawing needle)
-ydata = runif(n) * 5 # y value of points (for ddrawing needle)
+ddata = runif(n, min=0, max=0.5) # the distance from the center of needle to the nearest lines
+xdata = runif(n, min=0, max=10) # x value of points (for drawing needle)
+ydata = runif(n, min=0, max=5) # y value of points (for ddrawing needle)
 # the number of needles crossing a line
 cross_num = length(ddata[ddata / sin(theta_data) < 1 / 2])
 
