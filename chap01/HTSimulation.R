@@ -6,17 +6,8 @@
 #' and each time a tail comes up Peter loses 1 penny to Paul.
 #' Note: This program may show Peter's winnings
 
-n = 40        # the number of game
-x = c(1:n)    # x axis for graph
-y = rep(0, n) # y axis for graph (Peter's winnings)
-peter = 0     # peter's winnings
-for (i in 1:n) {
-  if (runif(1) < 1 / 2) { # if a head comes up
-    peter = peter + 1     # Peter gets 1 penny
-  } else {                # if a tail comes up
-    peter = peter - 1     # Peter loses 1 penny
-  }
-  y[i] = peter            # record Peter's winnings
-}
+n = 40 # the number of game
+penny = ifelse(runif(n) < 1/2, 1, -1)
+peter = cumsum(penny)
 
-plot(x, y, type='l') # then, draw the graph
+plot(1:n, peter, type='l', xlab='bet', ylab='winnings') # then, draw the graph

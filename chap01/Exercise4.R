@@ -7,29 +7,19 @@
 #' and probability 0.5 when your oppornent serves.
 
 n = 1000 # number of games
-win_count = 0 # the number of games which I won
-for (i in 1:n) {
-  score_me = score_oppornent = 0
-  is_serve_me = TRUE
-  while (score_me < 21 && score_oppornent < 21) {
-    
-    # if I serve, win with probability 0.6 and
-    # oppornent serve, win with probability of 0.5
-    if (is_serve_me && runif(1) < 0.6 || !is_serve_me && runif(1) < 0.5) {
-      score_me = score_me + 1
-      is_serve_me = TRUE
-    } else {
-      score_oppornent = score_oppornent + 1
-      is_serve_me = FALSE
-    }
-    
-  }
-  
-  if (score_me > score_oppornent) {
-    win_count = win_count + 1
-  }
-  
+win_rate = function(is_serve) if (is_serve) 0.6 else 0.5
+
+game = function(is_serve, me, opponent) {
+  if (me == 21) T # win the game
+  else if (opponent == 21) F # lose the game
+  else if (runif(1) < win_rate(is_serve)) # win the point
+    game(T, me+1, opponent) # win
+  else
+    game(F, me, opponent+1) # lose
 }
 
-cat('win probability: ', win_count / n)
+simulation = function(n) {
+  sapply(1:n, function(x) game(T, 0, 0))
+}
 
+cat('win probability: ', sum(simulation(n)) / n)

@@ -7,28 +7,13 @@
 #' About how large must n be so that approximately 95 out of 100
 #' times the proportion of heads is between .4 and .6?
 
-N = 100       # maximum number of n
-x = c(1:N)    # data for x axis
-y = rep(0, N) # proportion of heads is between .4 and .6
-for (n in 1:N) {
-  count_p = 0
-  for (i in 1:100) { # run 100 experiments
-    count_head = 0
-    for (j in 1:n) { # toss a coin n times
-      if (runif(1) < 1/ 2) { # if a result is a head
-        count_head = count_head + 1
-      }
-    }
-    
-    property = count_head / n
-    if (0.4 < property && property < 0.6) {
-      count_p = count_p + 1
-    }
-    
-  }
-  
-  y[n] = count_p
-  
-}
+n = 100 # maximum number of n
 
-plot(x, y, type='l')
+# make coin matrix
+coin = matrix(sample(c(T,F), n*100, replace=T), nrow=n, ncol=100)
+property = lapply(1:n, function(n)
+  apply(coin[1:n, ,drop=F], 2, function(x) length(which(x))/length(x))
+  ) # calculate propotion of head
+property = matrix(unlist(property), nrow=n, ncol=100, byrow=T) # list -> matrix
+plot(1:n, apply(property, 1, function(x) length(x[0.4<x&x<0.6])),
+     type='l', xlab='#coin toss', ylab='#>0.4 and <0.6')

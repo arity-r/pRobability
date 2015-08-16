@@ -6,16 +6,7 @@
 #' If not, you lose your dollar.
 
 n = 1000 # the number of bets
-bet_num = c(1:n)
-winnings = rep(0, n+1) # the amount of total winnings
-winnings[1] = 0
-for (i in 2:n+1) {
-  if (runif(1) < 1.0 / 36) {
-    winnings[i] = winnings[i-1] + 35 # win this game
-  } else {
-    winnings[i] = winnings[i-1] - 1 # lose 1 dollar
-  }
-}
-
-winnings = winnings[(2:n+1)] # remove 1st element by slicing
-plot(bet_num, winnings[(1:n)], type='l')
+dollar = ifelse(runif(n) < 1 / 36, 35, -1)
+winnings = cumsum(dollar)
+plot(1:n, winnings, type='l',
+     xlab='bet_num', ylab='winnings')

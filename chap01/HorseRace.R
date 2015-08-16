@@ -9,20 +9,22 @@
 #' This program simulates the outcomes of n races.
 
 n = 1000        # the number of race
-a_win = b_win = c_win = d_win = 0
-for (i in 1:n) {
-  r = runif(1)
-  if (r < 0.3) {        # Acorn wins
-    a_win = a_win + 1
-  } else if (r < 0.7) { # Balky wins (0.3 + 0.4)
-    b_win = b_win + 1
-  } else if (r < 0.9) { # Chestnut wins (0.3 + 0.4 + 0.2)
-    c_win = c_win + 1
-  } else {              # Dolby wins
-    d_win = d_win + 1
-  }
-}
+win_rate = c(.3, .4, .2, .1)
+win_horse = c('Acorn', 'Balky', 'Chestnut', 'Dolby')
 
-barplot(c(a_win, b_win, c_win, d_win),
-        main='Horse Races',
-        names.arg=c('Acorn', 'Balky', 'Chestnut', 'Dolby'))
+
+# cumlative winning rate for a horse
+win_rate = cumsum(win_rate / sum(win_rate))
+# create table for apply function
+rate_table = data.frame(Horse=win_horse, Rate=win_rate)
+# generate sentence for eval
+sentence = apply(rate_table, 1, function(x) paste(
+  c('ifelse(race<', x['Rate'], ',"', x['Horse'], '",\n'), collapse='') )
+sentence = paste(c(sentence, rep(')', length(win_horse))), collapse='')
+
+# do simulation
+race = runif(n)
+result = eval(parse(text=sentence))
+
+barplot(sapply(win_horse, function(x) length(which(result==x))),
+        main='Horse Races', names.arg=win_horse)

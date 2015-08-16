@@ -8,25 +8,16 @@
 #' that a triple-six will occur when time three dice are rolled n times.
 
 n = 160
-x = c(1:n)
-y = rep(0, n)
 
-for (i in 1:n) {
-  count_win = 0
-  for (j in 1:100) {
-    for (k in 1:i) {
-      dice_1 = as.integer(runif(1) * 6 + 1) # roll a dice
-      dice_2 = as.integer(runif(1) * 6 + 1) # roll a dice
-      dice_3 = as.integer(runif(1) * 6 + 1) # roll a dice
-      if (dice_1 == 6 && dice_2 == 6 && dice_3 == 6) { # if three-six
-        count_win = count_win + 1 # win the game
-        break
-      }
-    }
-  }
-  
-  y[i] = count_win / 100 # the probability of at least one triple-six
-  
-}
+# roll three dices
+dice = function(dummy) paste(sample(1:6, 3, replace=T), collapse=' ')
+# make dice matrix (attention: string format)
+dice = matrix(sapply(1:(n*100), dice), nrow=n, ncol=100)
 
-plot(x, y, main='Probability of at least one triple-six', type='l')
+win = lapply(1:n, function(n)
+  apply(dice[1:n, ,drop=F], 2, function(x) length(which(x=='6 6 6'))>0)
+) # winning game
+win = matrix(unlist(win), nrow=n, ncol=100, byrow=T) # list -> matrix
+plot(1:n, apply(win, 1, function(x) length(which(x))/ncol(win)),
+     main='Probability of at least one triple-six',
+     type='l', xlab='#dice roll', ylab='proberbility to win')
